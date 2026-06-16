@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Sun, Moon, Menu, X, ArrowUp, Cpu, Sparkles, BookOpen, 
+  Menu, X, ArrowUp, Cpu, Sparkles, BookOpen, 
   Briefcase, Award, Mail, Github, Linkedin, MessageSquareCode,
   User, CheckSquare
 } from "lucide-react";
@@ -20,34 +20,16 @@ import ResumeModal from "./components/ResumeModal";
 import { PERSONAL_INFO, PROJECTS } from "./data/portfolioData";
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(true); // Default to a stylish dark mode representation
+  const darkMode = true;
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
 
-  // Initialize and toggle dark mode classes on html element
+  // Initialize and force dark mode classes on html element
   useEffect(() => {
-    const savedTheme = localStorage.getItem("portfolio-theme");
-    if (savedTheme === "light") {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    } else {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("portfolio-theme", "dark");
   }, []);
-
-  const toggleDarkMode = () => {
-    const nextMode = !darkMode;
-    setDarkMode(nextMode);
-    if (nextMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("portfolio-theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("portfolio-theme", "light");
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,18 +105,8 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Configuration utility buttons (Dark Mode, Resume Trigger, Mobile menu Toggle) */}
+          {/* Configuration utility buttons (Resume Trigger, Mobile menu Toggle) */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-              aria-label="Toggle theme mode"
-              id="theme-toggler-btn"
-            >
-              {darkMode ? <Sun size={17} className="text-yellow-400" /> : <Moon size={17} className="text-slate-600" />}
-            </button>
-
             {/* Quick Resume view link */}
             <button
               onClick={() => setIsResumeOpen(true)}
@@ -241,11 +213,10 @@ export default function App() {
                 <div className="mt-3.5 h-1.5 w-16 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
               </div>
 
-              <div className="space-y-4 text-base md:text-lg text-slate-800 dark:text-[#F1F5F9] leading-relaxed font-sans font-semibold">
-                <p>{PERSONAL_INFO.about}</p>
-                <p>
-                  Collaboratively active across academic research parameters, database coordination workflows, and software creation constraints. Seeking to leverage modern natural natural language pipelines (e.g. BERT embeddings, TF-IDF overlays) to drive actionable human utilities.
-                </p>
+              <div className="space-y-5 text-[15px] text-slate-700 dark:text-slate-200 leading-[1.7] font-sans font-medium">
+                {PERSONAL_INFO.about.split("\n\n").map((para, idx) => (
+                  <p key={idx}>{para}</p>
+                ))}
               </div>
 
               {/* Badges overview */}

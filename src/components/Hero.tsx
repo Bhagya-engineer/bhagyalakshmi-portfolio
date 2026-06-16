@@ -454,14 +454,10 @@ export default function Hero({ onOpenResume, onScrollToProjects, onScrollToConta
                 </div>
                 
                 {/* Stats overlays */}
-                <div className="mt-5 w-full flex items-center justify-between font-mono text-xs text-slate-900 dark:text-[#CBD5E1]">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-full font-extrabold text-slate-900 dark:text-[#F1F5F9]">
+                <div className="mt-5 w-full flex items-center justify-center font-mono text-xs text-slate-900 dark:text-[#CBD5E1]">
+                  <div className="flex items-center gap-1.5 px-4 py-1.5 bg-slate-100 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-full font-extrabold text-slate-900 dark:text-[#F1F5F9]">
                     <Sparkles size={12} className="text-yellow-600 dark:text-yellow-400 animate-pulse" />
                     <span>8.20 B.Tech CGPA</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-full font-extrabold text-slate-900 dark:text-[#F1F5F9]">
-                    <Award size={12} className="text-blue-600 dark:text-[#60A5FA]" />
-                    <span>Oracle AI Scholar</span>
                   </div>
                 </div>
               </div>

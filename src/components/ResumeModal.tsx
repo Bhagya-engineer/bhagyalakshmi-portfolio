@@ -171,7 +171,7 @@ ${CERTIFICATIONS.map(cert => `- ${cert.title} (${cert.issuer})`).join("\n")}
                     <h3 className="border-b border-slate-300 font-display text-xs font-extrabold uppercase tracking-widest text-slate-950 pb-1 dark:border-white/20 dark:text-[#60A5FA] print:border-slate-400 print:text-black">
                       Professional Summary
                     </h3>
-                    <p className="mt-2 text-[12px] leading-relaxed text-slate-850 dark:text-[#CBD5E1] print:text-slate-800 font-semibold">
+                    <p className="mt-2 text-[12px] leading-relaxed text-slate-850 dark:text-[#CBD5E1] print:text-slate-800 font-semibold whitespace-pre-line">
                       {PERSONAL_INFO.about}
                     </p>
                   </div>

@@ -1,10 +1,5 @@
 import { Project, SkillCategory, Education, Certification, Internship } from "../types";
 import profileImg from "../assets/images/profile_avatar_1781536462326.jpg";
-import civitasImg from "../assets/images/civitas_ai_1781591074190.jpg";
-import examEvaluatorImg from "../assets/images/exam_evaluator_1781591096256.jpg";
-import soilDepictorImg from "../assets/images/soil_depictor_1781591117351.jpg";
-import trendcartImg from "../assets/images/trendcart_1781591138815.jpg";
-import blueEyesImg from "../assets/images/blue_eyes_1781591155074.jpg";
 import chocoRocksImg from "../assets/images/choco_rocks_1781591174033.jpg";
 
 export const PERSONAL_INFO = {
@@ -18,7 +13,7 @@ export const PERSONAL_INFO = {
   github: "https://github.com/Bhagya-engineer",
   linkedin: "https://linkedin.com/in/bhagya-lakshmi-3520352b8",
   profileImage: profileImg,
-  about: "I am a passionate Computer Science Engineering student specializing in Artificial Intelligence at Vignan's Institute of Engineering for Women. I enjoy building AI-powered applications, web solutions, and innovative systems that solve real-world problems. My interests include Artificial Intelligence, Machine Learning, NLP, Web Development, and Software Engineering."
+  about: "Computer Science Engineering student specializing in Artificial Intelligence at Vignan's Institute of Engineering for Women. Passionate about building AI-powered applications, NLP solutions, and modern web systems that solve real-world challenges.\n\nExperienced in AI Modeling, NLP Systems, and Full-Stack Development, with a strong focus on creating impactful, user-centric technologies."
 };
 
 export const PROJECTS: Project[] = [
@@ -27,7 +22,7 @@ export const PROJECTS: Project[] = [
     title: "CIVITAS AI – Legal Document Simplification Platform",
     technologies: ["Artificial Intelligence", "NLP", "Translation Systems", "Web Technologies"],
     description: "An AI-powered digital governance platform that simplifies complex government and legal documents. Features smart document simplification, intuitive side-by-side comparison overlays, and multilingual translation systems to break legal jargon into simple, actionable insights. Designed to help citizens avoid common errors, missed deadlines, or penalties and make confident, highly informed decisions.",
-    image: civitasImg,
+    image: "https://files.catbox.moe/aebq2r.jpeg",
     link: "https://lovable.dev/projects/acac20c4-9ec2-4ed0-98e0-04f2019d0e9c",
     github: "https://github.com/Bhagya-engineer/civitas-ai"
   },
@@ -36,7 +31,7 @@ export const PROJECTS: Project[] = [
     title: "AI-Based Exam Paper Evaluator",
     technologies: ["Python", "NLP", "TF-IDF", "BERT", "Streamlit"],
     description: "Developed an advanced NLP-powered system that automates the assessment of subjective student answers. Utilizing TF-IDF keyword overlap, Cosine Similarity, and semantic-aware BERT embeddings, the platform evaluates accuracy with high alignment to teacher keys. Powered by a fully interactive Streamlit application featuring role-based secure access for Teachers, Students, and Administrators to review grades and analytical reports. Improves school evaluation speed and decreases human bias.",
-    image: examEvaluatorImg,
+    image: "https://files.catbox.moe/s89pjp.png",
     link: "https://lovable.dev/login?redirect=%2Fprojects%2Fb30730db-5de8-41f2-bcab-273429595f88",
     github: "https://github.com/Bhagya-engineer/ai-exam-paper-evaluator"
   },
@@ -45,7 +40,7 @@ export const PROJECTS: Project[] = [
     title: "Soil Depictor – Smart Crop Recommendation System",
     technologies: ["HTML", "CSS", "Node.js"],
     description: "An interactive, multilingual crop advice application designed for absolute agricultural empowerment. Supports Telugu, Hindi, and English to help diverse demographic farmers easily identify soil-ideal crops based on regional soil chemistry and localized parameters. Includes rich graphic crop suitability analytics, detail sheets, and intuitive agricultural recommendations to maximize seasonal crop yield.",
-    image: soilDepictorImg,
+    image: "https://files.catbox.moe/2oc5yo.png",
     link: "https://github.com/Bhagya-engineer/soil-depictor",
     github: "https://github.com/Bhagya-engineer/soil-depictor"
   },
@@ -54,7 +49,7 @@ export const PROJECTS: Project[] = [
     title: "TrendCart",
     technologies: ["HTML", "CSS", "JavaScript"],
     description: "A fast, responsive, and aesthetically pleasing virtual e-commerce storefront with a seamless modern interface. Users can browse highly categorized items, explore specific collections, and complete interactive shopping cart flows. Standard client-side state handling implements quick checkout simulations.",
-    image: trendcartImg,
+    image: "https://files.catbox.moe/bfa56r.png",
     link: "https://trend-cart-three.vercel.app/",
     github: "https://github.com/Bhagya-engineer/TrendCart"
   },
@@ -63,7 +58,7 @@ export const PROJECTS: Project[] = [
     title: "The Blue Eyes",
     technologies: ["HTML", "CSS", "JavaScript"],
     description: "A highly stylized, elegant event decoration and comprehensive event management portal. Fully models high-end venue decorations, customized ceremony planning packages, beautiful photography backdrops, floral themes, and direct booking or inquiry triggers to maximize client inquiries and feedback.",
-    image: blueEyesImg,
+    image: "https://files.catbox.moe/o0yptc.jpeg",
     link: "https://the-blue-eyes.vercel.app/",
     github: "https://github.com/Bhagya-engineer/the-blue-eyes"
   },
