@@ -41,8 +41,8 @@ export const PROJECTS: Project[] = [
     technologies: ["HTML", "CSS", "Node.js"],
     description: "An interactive, multilingual crop advice application designed for absolute agricultural empowerment. Supports Telugu, Hindi, and English to help diverse demographic farmers easily identify soil-ideal crops based on regional soil chemistry and localized parameters. Includes rich graphic crop suitability analytics, detail sheets, and intuitive agricultural recommendations to maximize seasonal crop yield.",
     image: "https://files.catbox.moe/2oc5yo.png",
-    link: "https://github.com/Bhagya-engineer/soil-depictor",
-    github: "https://github.com/Bhagya-engineer/soil-depictor"
+    link: "https://lovable.dev/projects/d7339add-d2f8-4319-9874-e854e41e3bdb?invite=true"
+  
   },
   {
     id: "trendcart",
