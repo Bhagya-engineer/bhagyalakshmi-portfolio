@@ -238,10 +238,10 @@ ${CERTIFICATIONS.map(cert => `- ${cert.title} (${cert.issuer})`).join("\n")}
                     <div className="mt-3 space-y-3">
                       {SKILL_CATEGORIES.map((cat, idx) => (
                         <div key={idx} className="space-y-0.5">
-                          <p className="font-display text-[10.5px] font-extrabold tracking-tight text-slate-950 dark:text-[#FFFFFF] print:text-slate-900">
+                          <p className="font-display text-[12.5px] font-black tracking-tight text-slate-950 dark:text-[#FFFFFF] print:text-slate-900">
                             {cat.category}
                           </p>
-                          <p className="font-mono text-[10.5px] text-slate-800 dark:text-[#CBD5E1] print:text-slate-800 leading-relaxed font-bold">
+                          <p className="font-sans text-[11.5px] text-slate-800 dark:text-[#FFFFFF] print:text-slate-800 leading-relaxed font-semibold tracking-wide">
                             {cat.skills.join(", ")}
                           </p>
                         </div>

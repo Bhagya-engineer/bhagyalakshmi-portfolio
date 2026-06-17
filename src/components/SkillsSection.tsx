@@ -6,19 +6,22 @@ import { SKILL_CATEGORIES } from "../data/portfolioData";
 export default function SkillsSection() {
   const [activeTab, setActiveTab] = useState(0);
 
-  // Icon switcher for each index
-  const getCategoryIcon = (index: number) => {
+  // Icon switcher for each index with active state customization
+  const getCategoryIcon = (index: number, isActive: boolean) => {
+    const iconClass = isActive 
+      ? "text-blue-600 dark:text-blue-400" 
+      : "text-slate-500 dark:text-slate-400";
     switch (index) {
       case 0:
-        return <BrainCircuit className="text-blue-500" size={18} />;
+        return <BrainCircuit className={iconClass} size={18} />;
       case 1:
-        return <Code className="text-blue-500" size={18} />;
+        return <Code className={iconClass} size={18} />;
       case 2:
-        return <Database className="text-blue-500" size={18} />;
+        return <Database className={iconClass} size={18} />;
       case 3:
-        return <Hammer className="text-blue-500" size={18} />;
+        return <Hammer className={iconClass} size={18} />;
       default:
-        return <Cpu className="text-blue-500" size={18} />;
+        return <Cpu className={iconClass} size={18} />;
     }
   };
 
@@ -49,56 +52,63 @@ export default function SkillsSection() {
         {/* Tab/Column Grid Layout */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 items-start">
           
-          {/* Left Category Selection Tabs */}
+          {/* Left Category Selection Tabs - Redesigned to be highly consistent and professional */}
           <div className="space-y-2.5 md:col-span-4">
-            {SKILL_CATEGORIES.map((cat, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveTab(idx)}
-                className={`flex w-full items-center gap-3.5 rounded-xl px-4 py-4 text-left font-display text-base font-bold transition-all ${
-                  activeTab === idx
-                    ? "bg-blue-50 text-blue-800 shadow-sm dark:bg-blue-950/30 dark:text-[#60A5FA] dark:border dark:border-blue-500/10"
-                    : "text-slate-800 hover:bg-slate-100 hover:text-slate-950 dark:text-[#CBD5E1] dark:hover:bg-white/5 dark:hover:text-[#FFFFFF]"
-                }`}
-                id={`tab-skill-${idx}`}
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100/40 dark:bg-blue-900/30">
-                  {getCategoryIcon(idx)}
-                </span>
-                <span className="flex-1">{cat.category}</span>
-              </button>
-            ))}
+            {SKILL_CATEGORIES.map((cat, idx) => {
+              const isActive = activeTab === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveTab(idx)}
+                  className={`flex w-full items-center gap-3.5 rounded-xl px-4 py-3.5 text-left font-sans text-sm font-semibold tracking-wide transition-all border ${
+                    isActive
+                      ? "bg-slate-100/90 text-slate-950 border-slate-200 shadow-xs dark:bg-white/10 dark:text-white dark:border-white/15"
+                      : "text-slate-600 dark:text-slate-350 hover:bg-slate-50 hover:text-slate-950 dark:hover:bg-white/5 dark:hover:text-white border-transparent"
+                  }`}
+                  id={`tab-skill-${idx}`}
+                >
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+                    isActive 
+                      ? "bg-blue-50 dark:bg-blue-950/40" 
+                      : "bg-slate-100/60 dark:bg-white/5"
+                  }`}>
+                    {getCategoryIcon(idx, isActive)}
+                  </span>
+                  <span className="flex-1">{cat.category}</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Right Skills Rendering Panels */}
+          {/* Right Skills Rendering Panels - Redesigned matching typography guidelines */}
           <div className="glass rounded-2xl p-6 md:p-8 md:col-span-8 shadow-sm border border-slate-300 dark:border-white/10">
-            <h3 className="font-display text-lg font-extrabold text-slate-950 dark:text-[#FFFFFF] mb-6">
+            <h4 className="font-display text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">
               {SKILL_CATEGORIES[activeTab].category} Core Capabilities
-            </h3>
+            </h4>
 
             <div className="space-y-6">
               {SKILL_CATEGORIES[activeTab].skills.map((skill, sIdx) => {
                 const percentage = getProficiency(skill);
                 return (
                   <div key={sIdx} className="space-y-2.5">
-                    <div className="flex items-center justify-between font-mono">
-                      <span className="flex items-center gap-2 font-display text-base font-bold text-slate-900 dark:text-[#F1F5F9]">
-                        <CheckCircle size={15} className="text-blue-600 dark:text-[#60A5FA]" />
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-2.5 font-sans text-sm font-semibold text-slate-800 dark:text-[#F1F5F9] tracking-wide leading-normal">
+                        <CheckCircle size={14} className="text-blue-500 dark:text-blue-400 shrink-0" />
                         {skill}
                       </span>
-                      <span className="text-sm font-bold text-blue-600 dark:text-[#60A5FA]">
+                      <span className="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400">
                         {percentage}%
                       </span>
                     </div>
 
-                    {/* Progress Bar Container */}
-                    <div className="h-2.5 w-full rounded-full bg-slate-200/60 dark:bg-white/10">
+                    {/* Progress Bar Container - Refined to be thin and elegant */}
+                    <div className="h-1.5 w-full rounded-full bg-slate-200/60 dark:bg-white/10">
                       <motion.div
                         key={`${activeTab}-${sIdx}`}
                         initial={{ width: 0 }}
                         animate={{ width: `${percentage}%` }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="h-full rounded-full bg-linear-to-r from-blue-500 to-indigo-500"
+                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500/80"
                       ></motion.div>
                     </div>
                   </div>
@@ -106,10 +116,10 @@ export default function SkillsSection() {
               })}
             </div>
 
-            {/* Micro badge indicator */}
-            <div className="mt-8 border-t border-slate-300 dark:border-white/10 pt-4 flex items-center justify-between text-xs font-mono text-slate-700 dark:text-[#CBD5E1] font-bold">
+            {/* Micro badge indicator - Styled to match professional resume standards */}
+            <div className="mt-8 border-t border-slate-300 dark:border-white/10 pt-4 flex flex-col sm:flex-row gap-2 items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 font-medium">
               <span>* Proficiency self-rated based on academic & project exposure</span>
-              <span className="text-blue-600 dark:text-[#60A5FA] font-extrabold">Talada Bhagya Lakshmi</span>
+              <span className="text-slate-700 dark:text-slate-300 font-semibold">Talada Bhagya Lakshmi</span>
             </div>
           </div>
 

@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
     id: "civitas-ai",
     title: "CIVITAS AI – Legal Document Simplification Platform",
     technologies: ["Artificial Intelligence", "NLP", "Translation Systems", "Web Technologies"],
-    description: "An AI-powered digital governance platform that simplifies complex government and legal documents. Features smart document simplification, intuitive side-by-side comparison overlays, and multilingual translation systems to break legal jargon into simple, actionable insights. Designed to help citizens avoid common errors, missed deadlines, or penalties and make confident, highly informed decisions.",
+    description: "Developed an AI platform that simplifies complex state documents and legal jargon into clear, plain language. Features side-by-side comparative views and multilingual NLP translations to prevent compliance errors and support user accessibility.",
     image: "https://files.catbox.moe/aebq2r.jpeg",
     link: "https://lovable.dev/projects/acac20c4-9ec2-4ed0-98e0-04f2019d0e9c",
     github: "https://github.com/Bhagya-engineer/civitas-ai"
@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     id: "exam-paper-evaluator",
     title: "AI-Based Exam Paper Evaluator",
     technologies: ["Python", "NLP", "TF-IDF", "BERT", "Streamlit"],
-    description: "Developed an advanced NLP-powered system that automates the assessment of subjective student answers. Utilizing TF-IDF keyword overlap, Cosine Similarity, and semantic-aware BERT embeddings, the platform evaluates accuracy with high alignment to teacher keys. Powered by a fully interactive Streamlit application featuring role-based secure access for Teachers, Students, and Administrators to review grades and analytical reports. Improves school evaluation speed and decreases human bias.",
+    description: "Engineered an automated subjective answer grading system utilizing TF-IDF, Cosine Similarity, and BERT embeddings for semantic evaluation. Built a Streamlit interface featuring secure, role-based dashboards for administrators, teachers, and students.",
     image: "https://files.catbox.moe/s89pjp.png",
     link: "https://lovable.dev/login?redirect=%2Fprojects%2Fb30730db-5de8-41f2-bcab-273429595f88",
     github: "https://github.com/Bhagya-engineer/ai-exam-paper-evaluator"
@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
     id: "soil-depictor",
     title: "Soil Depictor – Smart Crop Recommendation System",
     technologies: ["HTML", "CSS", "Node.js"],
-    description: "An interactive, multilingual crop advice application designed for absolute agricultural empowerment. Supports Telugu, Hindi, and English to help diverse demographic farmers easily identify soil-ideal crops based on regional soil chemistry and localized parameters. Includes rich graphic crop suitability analytics, detail sheets, and intuitive agricultural recommendations to maximize seasonal crop yield.",
+    description: "Created a multilingual agricultural app in Node.js recommending optimal crops based on localized soil chemistry and features. Supports English, Hindi, and Telugu, offering data-driven suitability analytics to help regional farmers maximize crop yields.",
     image: "https://files.catbox.moe/2oc5yo.png",
     link: "https://lovable.dev/projects/d7339add-d2f8-4319-9874-e854e41e3bdb?invite=true"
   
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     id: "trendcart",
     title: "TrendCart",
     technologies: ["HTML", "CSS", "JavaScript"],
-    description: "A fast, responsive, and aesthetically pleasing virtual e-commerce storefront with a seamless modern interface. Users can browse highly categorized items, explore specific collections, and complete interactive shopping cart flows. Standard client-side state handling implements quick checkout simulations.",
+    description: "Designed a responsive virtual e-commerce storefront featuring dynamic category browsing, interactive cart management, and seamless checkout simulations. Implemented using clean HTML, Tailwind CSS, and optimized vanilla JavaScript state management.",
     image: "https://files.catbox.moe/bfa56r.png",
     link: "https://trend-cart-three.vercel.app/",
     github: "https://github.com/Bhagya-engineer/TrendCart"
@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
     id: "the-blue-eyes",
     title: "The Blue Eyes",
     technologies: ["HTML", "CSS", "JavaScript"],
-    description: "A highly stylized, elegant event decoration and comprehensive event management portal. Fully models high-end venue decorations, customized ceremony planning packages, beautiful photography backdrops, floral themes, and direct booking or inquiry triggers to maximize client inquiries and feedback.",
+    description: "Developed an interactive event planning and venue decoration portal with customized package calculators and user response pathways. Solves operational booking challenges for custom events by digitizing the client inquiry pipeline.",
     image: "https://files.catbox.moe/o0yptc.jpeg",
     link: "https://the-blue-eyes.vercel.app/",
     github: "https://github.com/Bhagya-engineer/the-blue-eyes"
@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
     id: "choco-rocks",
     title: "Choco Rocks",
     technologies: ["HTML", "CSS", "JavaScript"],
-    description: "An immersive chocolate-themed business storefront offering chocolate showcases, custom corporate gifting baskets, responsive ingredient details, and interactive feedback fields styled with rich warm palettes and responsive hover actions.",
+    description: "Created an interactive corporate gifting and artisanal chocolate storefront featuring product catalogs and ingredient breakdown tabs. Designed with highly responsive frontend components and custom user feedback capture fields.",
     image: chocoRocksImg,
     link: "https://choco-rocks.vercel.app/",
     github: "https://github.com/Bhagya-engineer/choco-rocks"
@@ -125,10 +125,9 @@ export const INTERNSHIP: Internship = {
   location: "Vijayawada, India",
   duration: "Summer 2024 (Structured Internship)",
   responsibilities: [
-    "Learned and put into practice foundational concepts inside Artificial Intelligence, Neural Networks, and Machine Learning algorithms.",
-    "Successfully developed and tested machine learning models for predictive statistics and classification datasets.",
-    "Analyzed production pipelines and reviewed architectural designs to gain exposure to real-world commercial AI applications.",
-    "Collaborated on practical AI-based use cases matching agricultural and education tech industry problems."
+    "Developed and evaluated predictive machine learning models for complex classification tasks.",
+    "Applied deep learning neural networks and analyzed production architectures of AI solutions.",
+    "Collaborated on practical AI-driven use cases to solve critical agricultural challenges."
   ]
 };
 
