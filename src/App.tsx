@@ -21,6 +21,7 @@ import { PERSONAL_INFO, PROJECTS } from "./data/portfolioData";
 
 export default function App() {
   const darkMode = true;
+  const [activeSection, setActiveSection] = useState<string>("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
@@ -43,21 +44,19 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const handleNavClick = (id: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    setActiveSection(id);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const menuItems = [
     { label: "Home", id: "home" },
     { label: "About", id: "about" },
+    { label: "Experience", id: "experience" },
+    { label: "Projects", id: "projects" },
     { label: "Skills", id: "skills" },
     { label: "Education", id: "education" },
-    { label: "Projects", id: "projects" },
-    { label: "Internship", id: "internship" },
     { label: "Certifications", id: "certifications" },
     { label: "Contact", id: "contact" }
   ];
@@ -79,7 +78,7 @@ export default function App() {
           
           {/* Portfolio Brand Logo */}
           <div 
-            onClick={() => scrollToSection("home")}
+            onClick={() => handleNavClick("home")}
             className="flex items-center gap-2 cursor-pointer font-display text-base font-bold tracking-tight text-slate-900 dark:text-white"
           >
             <Cpu className="text-blue-550 animate-spin-slow text-blue-500" size={20} />
@@ -91,18 +90,32 @@ export default function App() {
             </span>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="font-display text-sm font-bold text-slate-800 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
-                id={`nav-link-${item.id}`}
-              >
-                {item.label}
-              </button>
-            ))}
+          {/* Desktop Navigation Links with Highlights */}
+          <nav className="hidden md:flex items-center gap-2 lg:gap-3">
+            {menuItems.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`relative font-display text-xs lg:text-[13px] font-bold transition-all px-3 py-2 rounded-lg ${
+                    isActive
+                      ? "text-blue-500 dark:text-[#60A5FA]"
+                      : "text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                  id={`nav-link-${item.id}`}
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-indicator"
+                      className="absolute bottom-0 left-2 right-2 h-[2.5px] rounded-full bg-blue-500 dark:bg-[#60A5FA] shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Configuration utility buttons (Resume Trigger, Mobile menu Toggle) */}
@@ -140,15 +153,22 @@ export default function App() {
             className="border-b border-slate-200 bg-white dark:border-white/10 dark:bg-[#0a0a0a] md:hidden no-print"
           >
             <div className="flex flex-col gap-1 p-4">
-              {menuItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="rounded-lg px-4 py-3 text-left font-display text-sm font-semibold text-slate-650 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-[#111111]"
-                >
-                  {item.label}
-                </button>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`rounded-lg px-4 py-2.5 text-left font-display text-sm font-semibold transition-all ${
+                      isActive
+                        ? "bg-blue-50/70 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400"
+                        : "text-slate-650 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-[#111111]"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
               <hr className="my-2 border-slate-200 dark:border-white/5" />
               <button
                 onClick={() => {
@@ -165,118 +185,186 @@ export default function App() {
       </AnimatePresence>
 
       {/* Main Container Viewport */}
-      <main className="mx-auto max-w-6xl px-6">
-        
-        {/* HERO SECTION */}
-        <Hero
-          onOpenResume={() => setIsResumeOpen(true)}
-          onScrollToProjects={() => scrollToSection("projects")}
-          onScrollToContact={() => scrollToSection("contact")}
-        />
+      <main className="mx-auto max-w-6xl px-6 min-h-[calc(100vh-12rem)] flex flex-col justify-start relative py-12 md:py-16">
+        <AnimatePresence mode="wait">
+          {activeSection === "home" && (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Hero
+                onOpenResume={() => setIsResumeOpen(true)}
+                onScrollToProjects={() => handleNavClick("projects")}
+                onScrollToContact={() => handleNavClick("contact")}
+              />
+            </motion.div>
+          )}
 
-        {/* ABOUT ME SECTION */}
-        <section className="py-20 border-b border-slate-100 dark:border-white/10" id="about">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
-            
-            {/* Visual Icon card */}
-            <div className="lg:col-span-5 flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="glass rounded-2xl p-8 max-w-sm text-center relative shadow-sm border border-slate-300 dark:border-white/10"
-              >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-[#60A5FA] mb-6 font-bold">
-                  <User size={24} />
+          {activeSection === "about" && (
+            <motion.div
+              key="about"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* ABOUT ME SECTION */}
+              <section className="py-8 font-sans" id="about">
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
+                  
+                  {/* Visual Icon card */}
+                  <div className="lg:col-span-5 flex justify-center">
+                    <div className="glass rounded-2xl p-8 max-w-sm text-center relative shadow-sm border border-slate-300 dark:border-white/10 w-full">
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-[#60A5FA] mb-6 font-bold">
+                        <User size={24} />
+                      </div>
+                      
+                      <h3 className="font-display text-xl font-extrabold text-slate-950 dark:text-[#FFFFFF] mb-2">
+                        Talada Bhagya Lakshmi
+                      </h3>
+                      <p className="font-display text-xs text-slate-800 dark:text-[#CBD5E1] mb-4 uppercase tracking-widest font-extrabold">
+                        AI & ML Engineering Scholar
+                      </p>
+                      
+                      <p className="text-sm text-slate-800 dark:text-[#F1F5F9] leading-relaxed font-sans font-semibold">
+                        Engineering professional pathways matching automated text evaluation, crop advisors, and smart legal documentation.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Paragraph Column */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <div>
+                      <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-950 dark:text-[#FFFFFF] md:text-5xl">
+                        About Me
+                      </h2>
+                      <div className="mt-3.5 h-1.5 w-16 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                    </div>
+
+                    <div className="space-y-5 text-[15px] text-slate-700 dark:text-slate-200 leading-[1.7] font-sans font-medium">
+                      {PERSONAL_INFO.about.split("\n\n").map((para, idx) => (
+                        <p key={idx}>{para}</p>
+                      ))}
+                    </div>
+
+                    {/* Badges overview */}
+                    <div className="flex flex-wrap gap-4 pt-2">
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
+                        <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
+                        <span>AI Modeling</span>
+                      </div>
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
+                        <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
+                        <span>NLP Systems</span>
+                      </div>
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
+                        <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
+                        <span>Full Stack Dev</span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+              </section>
+            </motion.div>
+          )}
+
+          {activeSection === "experience" && (
+            <motion.div
+              key="experience"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <InternshipSection />
+            </motion.div>
+          )}
+
+          {activeSection === "projects" && (
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* PROJECTS SECTION */}
+              <section className="py-8" id="projects">
                 
-                <h3 className="font-display text-xl font-extrabold text-slate-950 dark:text-[#FFFFFF] mb-2">
-                  Talada Bhagya Lakshmi
-                </h3>
-                <p className="font-display text-xs text-slate-800 dark:text-[#CBD5E1] mb-4 uppercase tracking-widest font-extrabold">
-                  AI & ML Engineering Scholar
-                </p>
-                
-                <p className="text-sm text-slate-800 dark:text-[#F1F5F9] leading-relaxed font-sans font-semibold">
-                  Engineering professional pathways matching automated text evaluation, crop advisors, and smart legal documentation.
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Paragraph Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-950 dark:text-[#FFFFFF] md:text-5xl">
-                  About Me
-                </h2>
-                <div className="mt-3.5 h-1.5 w-16 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
-              </div>
-
-              <div className="space-y-5 text-[15px] text-slate-700 dark:text-slate-200 leading-[1.7] font-sans font-medium">
-                {PERSONAL_INFO.about.split("\n\n").map((para, idx) => (
-                  <p key={idx}>{para}</p>
-                ))}
-              </div>
-
-              {/* Badges overview */}
-              <div className="flex flex-wrap gap-4 pt-2">
-                <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
-                  <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
-                  <span>AI Modeling</span>
+                {/* Section Heading */}
+                <div className="mb-14 text-center">
+                  <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-950 dark:text-[#FFFFFF] md:text-5xl">
+                    Featured Case Projects
+                  </h2>
+                  <div className="mx-auto mt-3.5 h-1.5 w-16 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                  <p className="mt-5 text-base font-semibold text-slate-800 dark:text-[#F1F5F9] max-w-lg mx-auto font-sans">
+                    Showcase of software engineering web tools, machine learning pipelines, and advanced NLP implementations.
+                  </p>
                 </div>
-                <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
-                  <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
-                  <span>NLP Systems</span>
+
+                {/* Projects Grid */}
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {PROJECTS.map((proj) => (
+                    <ProjectCard key={proj.id} project={proj} />
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-900 dark:text-[#F1F5F9] bg-slate-100 border border-slate-300 dark:bg-white/10 dark:border-white/20 p-2.5 rounded-xl">
-                  <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-[#60A5FA]"></span>
-                  <span>Full Stack Dev</span>
-                </div>
-              </div>
-            </div>
 
-          </div>
-        </section>
+              </section>
+            </motion.div>
+          )}
 
-        {/* SKILLS SECTION */}
-        <SkillsSection />
+          {activeSection === "skills" && (
+            <motion.div
+              key="skills"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <SkillsSection />
+            </motion.div>
+          )}
 
-        {/* EDUCATION SECTION */}
-        <EducationTimeline />
+          {activeSection === "education" && (
+            <motion.div
+              key="education"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <EducationTimeline />
+            </motion.div>
+          )}
 
-        {/* PROJECTS SECTION */}
-        <section className="py-20 border-b border-slate-100 dark:border-white/10" id="projects">
-          
-          {/* Section Heading */}
-          <div className="mb-14 text-center">
-            <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-950 dark:text-[#FFFFFF] md:text-5xl">
-              Featured Case Projects
-            </h2>
-            <div className="mx-auto mt-3.5 h-1.5 w-16 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
-            <p className="mt-5 text-base font-semibold text-slate-800 dark:text-[#F1F5F9] max-w-lg mx-auto font-sans">
-              Showcase of software engineering web tools, machine learning pipelines, and advanced NLP implementations.
-            </p>
-          </div>
+          {activeSection === "certifications" && (
+            <motion.div
+              key="certifications"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CertificationsSection />
+            </motion.div>
+          )}
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PROJECTS.map((proj) => (
-              <ProjectCard key={proj.id} project={proj} />
-            ))}
-          </div>
-
-        </section>
-
-        {/* INTERNSHIP SECTION */}
-        <InternshipSection />
-
-        {/* CERTIFICATIONS SECTION */}
-        <CertificationsSection />
-
-        {/* CONTACT SECTION */}
-        <ContactForm />
-
+          {activeSection === "contact" && (
+            <motion.div
+              key="contact"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ContactForm />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Global Footer */}
@@ -332,7 +420,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            onClick={() => scrollToSection("home")}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="fixed bottom-6 right-6 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 hover:bg-blue-500 no-print"
             aria-label="Back to top"
             id="back-to-top-btn"
